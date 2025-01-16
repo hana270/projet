@@ -1,0 +1,38 @@
+<div class="admin-chat-container">
+  <div class="clients-list">
+    <h3 class="text-xl font-bold mb-4">Client Conversations</h3>
+    <div class="clients">
+      <div *ngFor="let client of clients" 
+           (click)="selectClient(client)"
+           [class.active]="selectedClient?.id === client.id"
+           class="client-item">
+        <span class="client-name">{{ client.username }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="chat-area" *ngIf="selectedClient">
+    <div class="chat-header">
+      <h4>Chat with {{ selectedClient.username }}</h4>
+    </div>
+
+    <div class="messages-container">
+      <div *ngFor="let message of messages" 
+           [class.admin-message]="message.sender.id === adminId"
+           [class.client-message]="message.sender.id !== adminId"
+           class="message">
+        <div class="message-content">{{ message.content }}</div>
+        <div class="message-time">{{ message.timestamp | date:'short' }}</div>
+      </div>
+    </div>
+
+    <div class="message-input">
+      <input type="text" 
+             [(ngModel)]="newMessage" 
+             (keyup.enter)="sendMessage()"
+             placeholder="Type your message..."
+             class="input-field">
+      <button (click)="sendMessage()" class="send-button">Send</button>
+    </div>
+  </div>
+</div>

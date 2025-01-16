@@ -1,0 +1,52 @@
+.admin-chat-container {
+  display: flex;
+  height: 90vh;
+  margin: 20px;
+  gap: 20px;
+}
+
+.clients-list {
+  width: 300px;
+  background: #f5f5f5;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.client-item {
+  padding: 12px;
+  margin: 8px 0;
+  background: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.client-item:hover {
+  background: #e9ecef;
+}
+
+.client-item.active {
+  background: #007bff;
+  color: white;
+}
+
+.chat-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #f5f5f5;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.chat-header {
+  padding: 20px;
+  background: #007bff;
+  color: white;
+}
+
+.messages-container {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}

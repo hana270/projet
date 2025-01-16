@@ -1,0 +1,95 @@
+<html>
+    <head>
+        <style>
+.dashboard {
+  display: flex;
+  height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #343a40;
+  color: #fff;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-header {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.sidebar-header h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar-menu li {
+  margin-bottom: 10px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.menu-item:hover {
+  background-color: #495057;
+}
+
+.menu-item i {
+  margin-right: 10px;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+  background-color: #fff;
+  overflow-y: auto;
+}
+
+        </style>
+    </head>
+    <body>
+      <div class="dashboard">
+        <aside class="sidebar">
+          <div class="sidebar-header">
+            <h2>Dashboard</h2>
+          </div>
+          <ul class="sidebar-menu">
+            <li>
+              <a routerLink="/dashboard/products" class="menu-item">
+                <i class="fas fa-box"></i>
+                <span>Gestion des Produits</span>
+              </a>
+            </li>
+            <li>
+              <button (click)="showMessages()" class="menu-item">
+                <i class="fas fa-envelope"></i>
+                <span>Messages</span>
+              </button>
+            </li>
+          </ul>
+        </aside>
+      
+        <main class="content">
+          <router-outlet></router-outlet>
+          <app-admin-messages *ngIf="showMessagesList"></app-admin-messages>
+        </main>
+      </div>
+    </body>
+</html>
+
+
+  

@@ -1,0 +1,114 @@
+<html>
+  <head>
+<style>
+.product-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #343a40;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.submit-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+  background-color: #218838;
+}
+</style>
+  </head>
+  <body>
+<h2>Add Product</h2>
+<form [formGroup]="productForm" (ngSubmit)="addProduct()" class="product-form">
+  <div class="form-group">
+    <small *ngIf="nameControl?.hasError('required') && nameControl?.touched">
+      Le nom est requis.
+    </small>
+    <small *ngIf="nameControl?.hasError('minlength') && nameControl?.touched">
+      Le nom doit comporter au moins 3 caractères.
+    </small>
+  </div>
+
+  <div class="form-group">
+    <label for="name">Nom du produit :</label>
+    <input id="name" formControlName="name" type="text" />
+    <div *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched">
+      <small>Le nom du produit est requis.</small>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="category">Catégorie :</label>
+    <input id="category" formControlName="category" type="text" />
+  </div>
+
+  <div class="form-group">
+    <label for="description">Description :</label>
+    <textarea id="description" formControlName="description"></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="image">Image :</label>
+    <input id="image" 
+           type="file" 
+           (change)="onFileSelect($event, 'image')"
+           accept="image/*" />
+    <small class="text-muted">Taille maximale : 20MB</small>
+  </div>
+  
+  <div class="form-group">
+    <label for="image3D">Image 3D (optionnelle) :</label>
+    <input 
+        id="image3D" 
+        type="file" 
+        (change)="onFileSelect($event, 'image3D')" 
+        accept=".glb,.gltf,.obj,.fbx,.3ds"  
+    />
+    <div *ngIf="image3DFile">
+        <small>Fichier sélectionné: {{image3DFile.name}}</small>
+    </div>
+</div>
+  <button type="submit" class="submit-button" [disabled]="productForm.invalid">Ajouter</button>
+</form>
+
+ 
+
+
+  </body>
+</html>

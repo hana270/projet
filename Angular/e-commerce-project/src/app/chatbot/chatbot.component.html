@@ -1,0 +1,25 @@
+<div class="chat-container">
+  <div #messageContainer class="messages-container">
+    <div *ngFor="let message of messages" 
+         [class.user-message]="message.sender.id === userId"
+         [class.admin-message]="message.sender.id !== userId"
+         class="message">
+      <div class="message-content">{{ message.content }}</div>
+      <div class="message-time">{{ message.timestamp | date:'short' }}</div>
+    </div>
+  </div>
+
+  <div class="message-input">
+    <input type="text" 
+           [(ngModel)]="newMessage" 
+           (keyup.enter)="sendMessage()"
+           [disabled]="isLoading"
+           placeholder="Type your message..."
+           class="input-field">
+    <button (click)="sendMessage()" 
+            [disabled]="isLoading"
+            class="send-button">
+      {{ isLoading ? 'Sending...' : 'Send' }}
+    </button>
+  </div>
+</div>
